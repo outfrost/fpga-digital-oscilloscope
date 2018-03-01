@@ -1,4 +1,5 @@
-# intermediate build files
+# Intermediate build files
+
 *.bgn
 *.bit
 *.bld
@@ -43,6 +44,7 @@
 *_xst.xrpt
 
 # iMPACT generated files
+
 _impactbatch.log
 impact.xsl
 impact_impact.xwbt
@@ -50,18 +52,80 @@ ise_impact.cmd
 webtalk_impact.xml
 
 # Core Generator generated files
+
 xaw2verilog.log
 
-# project-wide generated files
-*.gise
-par_usage_statistics.html
-usage_statistics_webtalk.html
-webtalk.log
-webtalk_pn.xml
+# Project-wide generated files
 
-# generated folders
 iseconfig/
 xlnx_auto_0_xdb/
 xst/
 _ngo/
 _xmsgs/
+netgen/
+*_html/
+*.gise
+par_usage_statistics.html
+usage_statistics_webtalk.html
+webtalk.log
+webtalk_pn.xml
+isim
+db
+incremental_db
+work
+*.log
+*.svf
+*.scr
+*.cmd
+*.bak
+*.lso
+*.elf
+*.ace
+*~
+*#
+*.swp
+*.ini
+*.html
+*.vhi
+*.wdb
+*.stx
+*.xmsgs
+*.xreport
+*.exe
+*.cmd_log
+*_beh.prj
+*.ncd
+*.cr.mti
+vsim.wlf
+transcript
+webtalk.log
+webtalk_impact.xml
+pepExtractor.prj
+impact.xsl
+impact_impact.xwbt
+sch2HdlBatchFile
+*.gyd
+*.jed
+*.jhd
+*.mfd
+*.nga
+*.pnx
+*.rpt
+*.tim
+*.tspec
+*.vhf
+*.vm6
+*.xml
+*.fdo
+*.tdo
+*.udo
+*.err
+wlftbdmbzb
+wlftwwf7me
+*.schlog
+*.spl
+
+# OS bullshit
+
+Thumbs.db
+.DS_Store
