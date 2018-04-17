@@ -27,21 +27,13 @@ architecture Behavioral of Sampler is
 	Signal clock_counter : INTEGER;
 	Signal sample_counter : INTEGER;
 	Signal pixel_counter : INTEGER;
-	Signal query_adc : STD_LOGIC;
 	Signal await_sample : STD_LOGIC;
-	Signal sample_ready : STD_LOGIC;
+	Signal adc_busy_last : STD_LOGIC;
 begin
 	
-	Clock_div : process ( Clk_50MHz, Hold, clock_counter ) is
+	Sampling_rate_ct : process ( Clk_50MHz, clock_counter ) is
 	begin
-		if (rising_edge(Clk_50MHz)) then
-			if (clock_counter = 0) then
-				if (Hold = '0') then
-					query_adc <= '1';
-				end if;
-			else				
-				query_adc <= '0';
-			end if;
+		if (falling_edge(Clk_50MHz)) then
 			if (clock_counter < 500000) then
 				clock_counter <= clock_counter + 1;
 			else
@@ -52,7 +44,7 @@ begin
 	
 	Pixel_ct : process ( Clk_50MHz, pixel_counter ) is
 	begin
-		if (rising_edge(Clk_50MHz)) then
+		if (falling_edge(Clk_50MHz)) then
 			if (pixel_counter < 692640) then
 				pixel_counter <= pixel_counter + 1;
 			else
@@ -61,10 +53,10 @@ begin
 		end if;
 	end process;
 	
-	Sample_query : process ( Clk_50MHz, query_adc ) is
+	Sample_query : process ( Clk_50MHz, Hold, clock_counter ) is
 	begin
 		if (rising_edge(Clk_50MHz)) then
-			if (query_adc = '1') then
+			if (clock_counter = 0 and Hold = '0') then
 				ADC_Start <= '1';
 				await_sample <= '1';
 			else
@@ -73,33 +65,30 @@ begin
 		end if;
 	end process;
 	
-	Sample_scan : process ( Clk_50MHz, ADC_Busy, await_sample ) is
-	begin
-		if (falling_edge(ADC_Busy) and await_sample = '1') then
-			sample_ready <= '1';
-		end if;
-	end process;
-	
-	Sample_store : process ( Clk_50MHz, ADC_Data, sample_ready, sample_counter, pixel_counter ) is
+	Sample_ct : process ( Clk_50MHz, Hold, sample_counter, pixel_counter ) is
 	begin
 		if (rising_edge(Clk_50MHz)) then
-			if (sample_ready = '1') then
-				Sample_Data <= ADC_Data(13 downto 5);
-				Sample_Addr <= std_logic_vector(to_unsigned(sample_counter, 10));
-				Sample_WE <= '1';
-			else
-				Sample_WE <= '0';
-			end if;
-		end if;
-		if (falling_edge(Clk_50MHz)) then
-			if (sample_ready = '1') then
-				sample_ready <= '0';
+			if (clock_counter = 0 and Hold = '0') then
 				if (sample_counter < 800) then
 					sample_counter <= sample_counter + 1;
 				elsif (pixel_counter >= 692640) then
 					sample_counter <= 0;
 				end if;
 			end if;
+		end if;
+	end process;
+	
+	Sample_scan : process ( Clk_50MHz, ADC_Data, ADC_Busy, adc_busy_last, await_sample, sample_counter ) is
+	begin
+		if (rising_edge(Clk_50MHz)) then
+			if (await_sample = '1' and adc_busy_last = '1' and ADC_Busy = '0') then
+				Sample_Data <= ADC_Data(13 downto 5);
+				Sample_Addr <= std_logic_vector(to_unsigned(sample_counter, 10));
+				Sample_WE <= '1';
+			else
+				Sample_WE <= '0';
+			end if;
+			adc_busy_last <= ADC_Busy;
 		end if;
 	end process;
 	
