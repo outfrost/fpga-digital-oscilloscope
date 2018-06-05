@@ -1,5 +1,3 @@
-![Tablica](tablica.jpg)
-
 # Układy cyfrowe i systemy wbudowane 2
 ### Dokumentacja projektu
 
@@ -41,10 +39,21 @@ potem dla modułów mają być opisy, jakie mają wejścia i wyjścia, jakich i 
 
 Głównym elementem projektu jest schemat połączeń logicznych.
 
-
+![Schemat](schematic.jpg)
 
 Na schemat składa się szereg modułów, odpowiadających za poszczególne funkcje podsystemowe:
 
+* `ADC_Ctrl` - Moduł autorstwa dra Sugiera, ułatwiający sterowanie przetwornikiem analogowo-cyfrowym
+* `Sampler` - Moduł odpowiedzialny za pobieranie cyfrowych próbek sygnału z `ADC_Ctrl` z odpowiednią częstotliwością i wpisywanie ich do pamięci
+* `SampleMemory` - Pamięć dwuportowa przechowująca próbki
+* `VGACtl` - Kontroler interfejsu VGA, pobierający próbki z pamięci i generujący na ich podstawie punkty na ekranie
+
+W ogólnym ujęciu praca układu wygląda następująco:
+
+* `Sampler` pobiera próbki cyfrowe z `ADC_Ctrl`
+	1. `Sampler` wysyła do `ADC_Ctrl` impuls `ADC_Start` i oczekuje na wyłączenie sygnału `ADC_Busy`
+	2. Po odebraniu na wejściu `ADC_Data` 14-bitowej próbki `Sampler` wybiera z niej 9 najstarszych bitów
+	3. `Sampler` wysyła 9-bitową próbkę do pamięci poprzez port `Sample_Data` i wpisuje ją pod odpowiedni adres ustawiony na porcie `Sample_Addr`, wysyłając do `SampleMemory` impuls `Sample_WE`
 * 
 
 #### 2. Moduły
