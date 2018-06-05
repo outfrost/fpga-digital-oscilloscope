@@ -23,7 +23,7 @@ Do realizacji projektu wykorzystano układ FPGA XC3S500E firmy Xilinx, zainstalo
 
 #### 3. Zagadnienia teoretyczne
 
-Zaprojektowany układ używa opisanych w [2] protokołów sterowania interfejsem VGA oraz przetwornikiem analogowo-cyfrowym (ADC) z przedwzmacniaczem, dostępnymi na płycie Spartan-3E. W celu ułatwienia korzystania z ADC, układ wykorzystuje podsystem `ADC_Ctrl` zaczerpnięty z [3]. Dodatkowo, podczas implementacji wyświetlania obrazu przez interfejs VGA, skorzystano z opisu synchronizacji sygnałów dla trybu VGA 800x600@72Hz, dostępnego w [4]. Przy tworzeniu kodu VHDL implementacji projektu korzystano również w celach referencyjnych z [5] oraz [6].
+Zaprojektowany układ używa opisanych w [2] protokołów sterowania interfejsem VGA oraz przetwornikiem analogowo-cyfrowym (ADC) z przedwzmacniaczem, dostępnymi na płycie Spartan-3E. W celu ułatwienia korzystania z ADC, układ wykorzystuje moduł `ADC_Ctrl` zaczerpnięty z [3]. Dodatkowo, podczas implementacji wyświetlania obrazu przez interfejs VGA, skorzystano z opisu synchronizacji sygnałów dla trybu VGA 800x600@72Hz, dostępnego w [4]. Przy tworzeniu kodu VHDL modułów projektu korzystano również w celach referencyjnych z [5] oraz [6].
 
 ### 2. Projekt
 <!--
@@ -39,6 +39,13 @@ potem dla modułów mają być opisy, jakie mają wejścia i wyjścia, jakich i 
 
 #### 1. Hierarchia
 
+Głównym elementem projektu jest schemat połączeń logicznych.
+
+
+
+Na schemat składa się szereg modułów, odpowiadających za poszczególne funkcje podsystemowe:
+
+* 
 
 #### 2. Moduły
 
