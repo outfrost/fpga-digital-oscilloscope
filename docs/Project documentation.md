@@ -16,7 +16,7 @@ Celem projektu było zbudowanie układu cyfrowego realizującego zadanie oscylos
 
 #### 2. Sprzęt
 
-Do realizacji projektu wykorzystano układ FPGA XC3S500E firmy Xilinx, zainstalowany na płycie Spartan-3E. Zestaw ten wyposażony był w wyjście obrazu w standardzie VGA, przetwornik analogowo-cyfrowy z przedwzmacniaczem, a także zestaw przełączników i przycisków [1], które również wykorzystano.
+Do realizacji projektu wykorzystano układ FPGA XC3S500E firmy Xilinx, zainstalowany na płycie Spartan-3E. Zestaw ten wyposażony był [1] w wyjście obrazu w standardzie VGA, przetwornik analogowo-cyfrowy z przedwzmacniaczem, a także zestaw przełączników i przycisków, które również wykorzystano.
 <!-- TODO Monitor i potencjomtr -->
 
 #### 3. Zagadnienia teoretyczne
@@ -54,7 +54,7 @@ W ogólnym ujęciu praca układu wygląda następująco:
 	1. `Sampler` wysyła do `ADC_Ctrl` impuls `ADC_Start` i oczekuje na wyłączenie sygnału `ADC_Busy`
 	2. Po odebraniu na wejściu `ADC_Data` 14-bitowej próbki `Sampler` wybiera z niej 9 najstarszych bitów
 	3. `Sampler` wysyła 9-bitową próbkę do pamięci poprzez port `Sample_Data` i wpisuje ją pod odpowiedni adres ustawiony na porcie `Sample_Addr`, wysyłając do `SampleMemory` impuls `Sample_WE`
-* 
+*
 
 #### 2. Moduły
 
@@ -84,9 +84,9 @@ w podsumowaniu rzeczy typu co zrobilibyśmy inaczej jakbyśmy pracowali nad tym 
 na końcu "Literatura" czyli bibliografia z tymi przypisami
 gdzie z automatu trzeba wrzucić opisy XC3S500E, User Guide 230 i stronę o układach Sugiera
 -->
-1. Xilinx, Inc., 2013. _Spartan-3E FPGA Family Data Sheet_ (https://www.xilinx.com)
+1. Xilinx, Inc., 2013. _Spartan-3E FPGA Family Data Sheet_ (https://www.xilinx.com/support/documentation/data_sheets/ds312.pdf)
 
-1. Xilinx, Inc., 2011. _Spartan-3E FPGA Starter Kit Board User Guide_ (https://www.xilinx.com)
+1. Xilinx, Inc., 2011. _Spartan-3E FPGA Starter Kit Board User Guide_ (https://www.xilinx.com/support/documentation/boards_and_kits/ug230.pdf)
 
 1. Sugier, J. _Zajęcia projektowe do przedmiotu "Układy cyfrowe i systemy wbudowane": Zestawy Digilent S3E-Starter_ (http://www.zsk.iiar.pwr.edu.pl/zsk_ftp/fpga/)
 
