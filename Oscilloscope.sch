@@ -6,36 +6,6 @@
         <trait edittrait="all:0" />
     </attr>
     <netlist>
-        <signal name="XLXN_82(9:0)" />
-        <signal name="XLXN_103" />
-        <signal name="XLXN_105" />
-        <signal name="XLXN_109(13:0)" />
-        <signal name="XLXN_110" />
-        <signal name="XLXN_114(7:0)" />
-        <signal name="XLXN_127(9:0)" />
-        <signal name="XLXN_148" />
-        <signal name="XLXN_150" />
-        <signal name="XLXN_154(13:0)" />
-        <signal name="XLXN_155" />
-        <signal name="XLXN_159(7:0)" />
-        <signal name="XLXN_172(9:0)" />
-        <signal name="XLXN_193" />
-        <signal name="XLXN_195" />
-        <signal name="XLXN_199(13:0)" />
-        <signal name="XLXN_200" />
-        <signal name="XLXN_204(7:0)" />
-        <signal name="XLXN_225(9:0)" />
-        <signal name="XLXN_246" />
-        <signal name="XLXN_248" />
-        <signal name="XLXN_252(13:0)" />
-        <signal name="XLXN_253" />
-        <signal name="XLXN_257(7:0)" />
-        <signal name="XLXN_210" />
-        <signal name="XLXN_211" />
-        <signal name="XLXN_212" />
-        <signal name="XLXN_213" />
-        <signal name="XLXN_267" />
-        <signal name="XLXN_268" />
         <signal name="XLXN_25(8:0)" />
         <signal name="XLXN_26(9:0)" />
         <signal name="Clk_50MHz" />
@@ -47,9 +17,7 @@
         <signal name="VGA_R" />
         <signal name="XLXN_23(8:0)" />
         <signal name="XLXN_24(9:0)" />
-        <signal name="XLXN_280(9:0)" />
         <signal name="SPI_MOSI" />
-        <signal name="SPI_MISO" />
         <signal name="SPI_SCK" />
         <signal name="AD_CONV" />
         <signal name="AMP_CS" />
@@ -68,18 +36,13 @@
         <signal name="LED2" />
         <signal name="LED1" />
         <signal name="LED0" />
-        <signal name="XLXN_301" />
         <signal name="XLXN_60" />
-        <signal name="XLXN_303" />
         <signal name="XLXN_51" />
         <signal name="XLXN_65" />
         <signal name="XLXN_67(13:0)" />
-        <signal name="XLXN_307(13:0)" />
-        <signal name="XLXN_308" />
         <signal name="XLXN_56" />
         <signal name="ROT_A" />
         <signal name="XLXN_55(7:0)" />
-        <signal name="XLXN_312(7:0)" />
         <signal name="XLXN_69(7:0)" />
         <signal name="SW3" />
         <signal name="XLXN_69(7)" />
@@ -93,8 +56,7 @@
         <signal name="XLXN_69(2)" />
         <signal name="XLXN_69(1)" />
         <signal name="XLXN_69(0)" />
-        <signal name="XLXN_343" />
-        <signal name="XLXN_344" />
+        <signal name="SPI_MISO" />
         <port polarity="Input" name="Clk_50MHz" />
         <port polarity="Output" name="VGA_VS" />
         <port polarity="Output" name="VGA_HS" />
@@ -102,7 +64,6 @@
         <port polarity="Output" name="VGA_G" />
         <port polarity="Output" name="VGA_R" />
         <port polarity="Output" name="SPI_MOSI" />
-        <port polarity="Input" name="SPI_MISO" />
         <port polarity="Output" name="SPI_SCK" />
         <port polarity="Output" name="AD_CONV" />
         <port polarity="Output" name="AMP_CS" />
@@ -126,6 +87,7 @@
         <port polarity="Input" name="SW0" />
         <port polarity="Input" name="SW1" />
         <port polarity="Input" name="SW2" />
+        <port polarity="Input" name="SPI_MISO" />
         <blockdef name="VGACtl">
             <timestamp>2018-3-20T15:27:51</timestamp>
             <rect width="64" x="0" y="20" height="24" />
@@ -224,29 +186,6 @@
             <line x2="64" y1="-32" y2="-64" x1="128" />
             <line x2="64" y1="-64" y2="0" x1="64" />
         </blockdef>
-        <block symbolname="ADC_Ctrl" name="XLXI_7">
-            <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
-            <blockpin signalname="ROT_A" name="AMP_WE" />
-            <blockpin signalname="XLXN_51" name="ADC_Start" />
-            <blockpin signalname="SPI_MISO" name="SPI_MISO" />
-            <blockpin signalname="AMP_DOUT" name="AMP_DOUT" />
-            <blockpin signalname="XLXN_69(7:0)" name="AMP_DI(7:0)" />
-            <blockpin signalname="XLXN_60" name="Busy" />
-            <blockpin signalname="SPI_MOSI" name="SPI_MOSI" />
-            <blockpin signalname="SPI_SCK" name="SPI_SCK" />
-            <blockpin signalname="AMP_CS" name="AMP_CS" />
-            <blockpin signalname="AMP_SHDN" name="AMP_SHDN" />
-            <blockpin signalname="AD_CONV" name="AD_CONV" />
-            <blockpin signalname="DAC_CS" name="DAC_CS" />
-            <blockpin signalname="DAC_CLR" name="DAC_CLR" />
-            <blockpin signalname="SPI_SS_B" name="SPI_SS_B" />
-            <blockpin signalname="SF_CE0" name="SF_CE0" />
-            <blockpin signalname="FPGA_INIT_B" name="FPGA_INIT_B" />
-            <blockpin signalname="XLXN_67(13:0)" name="ADC_DOA(13:0)" />
-            <blockpin name="ADC_DOB(13:0)" />
-            <blockpin name="Reset" />
-            <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
-        </block>
         <block symbolname="Sampler" name="XLXI_10">
             <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
             <blockpin signalname="XLXN_60" name="ADC_Busy" />
@@ -322,10 +261,31 @@
             <blockpin signalname="SW0" name="I" />
             <blockpin signalname="XLXN_69(0)" name="O" />
         </block>
+        <block symbolname="ADC_Ctrl" name="XLXI_53">
+            <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
+            <blockpin signalname="ROT_A" name="AMP_WE" />
+            <blockpin signalname="XLXN_51" name="ADC_Start" />
+            <blockpin signalname="SPI_MISO" name="SPI_MISO" />
+            <blockpin signalname="AMP_DOUT" name="AMP_DOUT" />
+            <blockpin signalname="XLXN_69(7:0)" name="AMP_DI(7:0)" />
+            <blockpin signalname="XLXN_60" name="Busy" />
+            <blockpin signalname="SPI_MOSI" name="SPI_MOSI" />
+            <blockpin signalname="SPI_SCK" name="SPI_SCK" />
+            <blockpin signalname="AMP_CS" name="AMP_CS" />
+            <blockpin signalname="AMP_SHDN" name="AMP_SHDN" />
+            <blockpin signalname="AD_CONV" name="AD_CONV" />
+            <blockpin signalname="DAC_CS" name="DAC_CS" />
+            <blockpin signalname="DAC_CLR" name="DAC_CLR" />
+            <blockpin signalname="SPI_SS_B" name="SPI_SS_B" />
+            <blockpin signalname="SF_CE0" name="SF_CE0" />
+            <blockpin signalname="FPGA_INIT_B" name="FPGA_INIT_B" />
+            <blockpin signalname="XLXN_67(13:0)" name="ADC_DOA(13:0)" />
+            <blockpin name="ADC_DOB(13:0)" />
+            <blockpin name="Reset" />
+            <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
+        </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
-        <instance x="1024" y="1072" name="XLXI_7" orien="R0">
-        </instance>
         <instance x="1904" y="960" name="XLXI_10" orien="R0">
         </instance>
         <branch name="XLXN_25(8:0)">
@@ -386,9 +346,6 @@
         </instance>
         <branch name="SPI_MOSI">
             <wire x2="1536" y1="336" y2="336" x1="1504" />
-        </branch>
-        <branch name="SPI_MISO">
-            <wire x2="1536" y1="272" y2="272" x1="1504" />
         </branch>
         <branch name="SPI_SCK">
             <wire x2="1536" y1="400" y2="400" x1="1504" />
@@ -476,8 +433,7 @@
             <wire x2="2496" y1="672" y2="1344" x1="2496" />
         </branch>
         <branch name="ROT_A">
-            <wire x2="1008" y1="272" y2="272" x1="400" />
-            <wire x2="1024" y1="272" y2="272" x1="1008" />
+            <wire x2="1024" y1="272" y2="272" x1="400" />
         </branch>
         <branch name="XLXN_55(7:0)">
             <wire x2="2432" y1="1280" y2="1280" x1="960" />
@@ -510,7 +466,6 @@
         <iomarker fontsize="28" x="3040" y="320" name="VGA_HS" orien="R0" />
         <iomarker fontsize="28" x="3040" y="384" name="VGA_VS" orien="R0" />
         <iomarker fontsize="28" x="1536" y="336" name="SPI_MOSI" orien="R0" />
-        <iomarker fontsize="28" x="1536" y="272" name="SPI_MISO" orien="R0" />
         <iomarker fontsize="28" x="1536" y="400" name="SPI_SCK" orien="R0" />
         <iomarker fontsize="28" x="1536" y="464" name="AD_CONV" orien="R0" />
         <iomarker fontsize="28" x="1536" y="528" name="AMP_CS" orien="R0" />
@@ -590,5 +545,11 @@
             <wire x2="544" y1="640" y2="640" x1="528" />
         </branch>
         <iomarker fontsize="28" x="400" y="272" name="ROT_A" orien="R180" />
+        <instance x="1024" y="1072" name="XLXI_53" orien="R0">
+        </instance>
+        <branch name="SPI_MISO">
+            <wire x2="1536" y1="272" y2="272" x1="1504" />
+        </branch>
+        <iomarker fontsize="28" x="1536" y="272" name="SPI_MISO" orien="R0" />
     </sheet>
 </drawing>
