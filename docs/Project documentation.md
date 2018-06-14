@@ -90,8 +90,8 @@ gdzie z automatu trzeba wrzucić opisy XC3S500E, User Guide 230 i stronę o ukł
 
 1. Sugier, J. _Zajęcia projektowe do przedmiotu "Układy cyfrowe i systemy wbudowane": Zestawy Digilent S3E-Starter_ (http://www.zsk.iiar.pwr.edu.pl/zsk_ftp/fpga/)
 
-1. SECONS Ltd., 2008. _VESA Signal 800 x 600 @ 72 Hz timing_ (http://tinyvga.com/vga-timing/800x600@72Hz)
+1. _VESA Signal 800 x 600 @ 72 Hz timing_ (SECONS Ltd., 2008) (http://tinyvga.com/vga-timing/800x600@72Hz)
 
 1. Zhang, W., 2001. _VHDL Tutorial: Learn by Example_ (University of California, Riverside, 2001) (http://esd.cs.ucr.edu/labs/tutorial/)
 
-1. Hilbert, S., 2013. _VHDL Type Conversion (BitWeenie, LLC, 2013) (http://www.bitweenie.com/listings/vhdl-type-conversion/)
+1. Hilbert, S., 2013. _VHDL Type Conversion_ (BitWeenie, LLC, 2013) (http://www.bitweenie.com/listings/vhdl-type-conversion/)
