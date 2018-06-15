@@ -13,17 +13,17 @@ use IEEE.NUMERIC_STD.ALL;
 entity VGACtl is
 	Port ( PixelClk_50MHz : in  STD_LOGIC;
 		   Sample_Data : in  STD_LOGIC_VECTOR (8 downto 0);
-		   Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0);
-		   VGA_R : out  STD_LOGIC;
-		   VGA_G : out  STD_LOGIC;
-		   VGA_B : out  STD_LOGIC;
-		   VGA_HS : out  STD_LOGIC;
-		   VGA_VS : out  STD_LOGIC);
+		   Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
+		   VGA_R : out  STD_LOGIC := '0';
+		   VGA_G : out  STD_LOGIC := '0';
+		   VGA_B : out  STD_LOGIC := '0';
+		   VGA_HS : out  STD_LOGIC := '0';
+		   VGA_VS : out  STD_LOGIC := '0');
 end VGACtl;
 
 architecture Behavioral of VGACtl is
-	Signal vs_counter : INTEGER;
-	Signal hs_counter : INTEGER;
+	Signal vs_counter : INTEGER := 0;
+	Signal hs_counter : INTEGER := 0;
 begin
 	
 	Horizontal_sync : process ( PixelClk_50MHz, hs_counter ) is
@@ -85,4 +85,3 @@ begin
 	end process;
 	
 end Behavioral;
-

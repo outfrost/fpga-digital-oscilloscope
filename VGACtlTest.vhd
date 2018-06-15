@@ -71,7 +71,7 @@ BEGIN
 		-- hold reset state for 100 ns.
 		wait for 100 ns;
 		
-		for i in 1 to 256 loop
+		while true loop
 			if (Sample_Addr(1 downto 0) = "00") then
 				Sample_Data <= "001101011";
 			elsif (Sample_Addr(1 downto 0) = "01") then

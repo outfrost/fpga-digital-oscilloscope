@@ -39,7 +39,7 @@ potem dla modułów mają być opisy, jakie mają wejścia i wyjścia, jakich i 
 
 Głównym elementem projektu jest schemat połączeń logicznych.
 
-![Schemat](schematic.jpg)
+![Schemat](img/schematic.jpg)
 
 Na schemat składa się szereg modułów, odpowiadających za poszczególne funkcje podsystemowe:
 

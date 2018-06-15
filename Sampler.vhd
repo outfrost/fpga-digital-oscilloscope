@@ -15,13 +15,13 @@ entity Sampler is
            ADC_Busy : in  STD_LOGIC;
            ADC_Data : in  STD_LOGIC_VECTOR (13 downto 0);
            Hold : in  STD_LOGIC;
-           Sample_WE : out  STD_LOGIC;
-           Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0);
-           Sample_Data : out  STD_LOGIC_VECTOR (8 downto 0);
-           AMP_WE : out  STD_LOGIC;
-           AMP_Data : out  STD_LOGIC_VECTOR (7 downto 0);
-           ADC_Start : out  STD_LOGIC;
-		   Debug : out  STD_LOGIC);
+           Sample_WE : out  STD_LOGIC := '0';
+           Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
+           Sample_Data : out  STD_LOGIC_VECTOR (8 downto 0) := "000000000";
+           AMP_WE : out  STD_LOGIC := '0';
+           AMP_Data : out  STD_LOGIC_VECTOR (7 downto 0) := "00000000";
+           ADC_Start : out  STD_LOGIC := '0';
+		   Debug : out  STD_LOGIC := '0');
 end Sampler;
 
 architecture Behavioral of Sampler is
@@ -30,13 +30,13 @@ architecture Behavioral of Sampler is
 	--Type PreampState is (ColdStart, ControlWordSet, WriteEnableSent, AwaitingInit, Ready);
 	Type ScanState is (Idle, StartSent, AwaitingSample, SampleAcquired, WriteEnableSent);
 
-	Signal state : SamplerState;
+	Signal state : SamplerState := Ready;
 	--Signal preamp_state : PreampState;
-	Signal scan_state : ScanState;
+	Signal scan_state : ScanState := Idle;
 	
-	Signal clock_counter : INTEGER;
-	Signal sample_counter : INTEGER;
-	Signal pixel_counter : INTEGER;
+	Signal clock_counter : INTEGER := 0;
+	Signal sample_counter : INTEGER := 0;
+	Signal pixel_counter : INTEGER := 0;
 begin
 	
 	--Root_state : process ( preamp_state ) is
@@ -137,4 +137,3 @@ begin
 	end process;
 	
 end Behavioral;
-
