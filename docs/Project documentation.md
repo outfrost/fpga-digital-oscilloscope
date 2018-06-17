@@ -62,7 +62,7 @@ Zadaniem `Sampler`a jest pobieranie próbek sygnału wejściowego, skonwertowany
 
 Cały stan modułu byłby trudny do przedstawienia na grafie automatu, jednak wyróżnić można maszynę stanów służącą do pobierania próbek z ADC.
 
-![FSM-Sampler](img/FSM-Sampler.svg =240x)  
+![FSM-Sampler](img/FSM-Sampler.svg)  
 _Ryc. 2.2. Sampler - Maszyna stanów_
 
 * **q0** - `Idle` - stan bezczynności
@@ -470,7 +470,7 @@ Cały układ taktowany jest zegarem 50 MHz, czyli o okresie 20 ns. Ograniczenia 
 
 Oscyloskop powinien zostać zaprogramowany na płycie Spartan-3E z mikroukładem FPGA XC3S500E.
 
-![UserGuide-Board](img/UserGuide-Board-print.png =400x)
+![UserGuide-Board](img/UserGuide-Board.png)
 _Ryc. 3.1. Istotne elementy płyty Spartan-3E_
 
 <div class="page-break"></div>
@@ -485,7 +485,7 @@ Aby uruchomić oscyloskop, należy wykonać następujące czynności:
 1. Przekręcić pokrętło "Rotary Encoder" w prawo o jeden przeskok
 1. Powtórzyć poprzedni krok, jeżeli występuje problem z obserwacją próbkowanego sygnału
 
-![UserGuide-Operation](img/UserGuide-Operation-print.png)
+![UserGuide-Operation](img/UserGuide-Operation.png)
 _Ryc. 3.2. Schemat połączenia urządzeń_
 
 ### 4. Podsumowanie
