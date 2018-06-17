@@ -3,19 +3,19 @@
 
 ## Oscyloskop cyfrowy
 
-Uczestnicy						| Prowadzący			| Termin zajęć			
---------------------------------|-----------------------|-----------------------
-Iwo Bujkiewicz (226203)			| Dr inż. Jarosław Sugier	| Wtorek parzysty 15:00
+Uczestnicy					| Prowadzący			| Termin zajęć			
+----------------------------|-----------------------|---------------------------
+Iwo Bujkiewicz (226203)		| Dr inż. Jarosław Sugier	| Wtorek parzysty 15:00
 
 
 ### 1. Wprowadzenie
 #### 1. Cel i zakres projektu
 
-Celem projektu było zbudowanie układu cyfrowego realizującego zadanie oscyloskopu cyfrowego. W zakres prac wchodziła implementacja wyświetlania przebiegu zarejestrowanego cyfrowo sygnału analogowego na podłączonym do układu monitorze VGA z określoną częstotliwością próbkowania.
+Celem projektu było zbudowanie układu cyfrowego realizującego zadanie oscyloskopu cyfrowego. W zakres prac wchodziła implementacja wyświetlania zarejestrowanego cyfrowo z określoną częstotliwością próbkowania przebiegu sygnału analogowego na podłączonym do układu monitorze VGA.
 
 #### 2. Sprzęt
 
-Do realizacji projektu wykorzystano układ FPGA XC3S500E firmy Xilinx, zainstalowany na płycie Spartan-3E. Zestaw ten wyposażony był [1] w wyjście obrazu w standardzie VGA, przetwornik analogowo-cyfrowy z przedwzmacniaczem, a także zestaw przełączników i przycisków, które również wykorzystano.
+Do realizacji projektu wykorzystano mikroukład FPGA XC3S500E firmy Xilinx, zainstalowany na płycie Spartan-3E. Zestaw ten wyposażony był [1] w wyjście obrazu w standardzie VGA, przetwornik analogowo-cyfrowy z przedwzmacniaczem, a także zestaw przełączników i przycisków, które również wykorzystano.
 
 Zewnętrznie do zestawu podłączano monitor VGA, obsługujący tryb 800x600@72Hz, oraz potencjometr, służący jako źródło sygnału analogowego do próbkowania.
 
@@ -31,7 +31,7 @@ Zaprojektowany układ używa opisanych w [2] protokołów sterowania interfejsem
 Głównym elementem projektu jest schemat połączeń logicznych.
 
 ![Schemat](img/schematic.jpg)
-_Ryc. 1.1. Główny schemat układu_
+_Ryc. 2.1. Główny schemat układu_
 
 Na schemat składa się szereg modułów, odpowiadających za poszczególne funkcje podsystemowe:
 
@@ -62,7 +62,8 @@ Zadaniem `Sampler`a jest pobieranie próbek sygnału wejściowego, skonwertowany
 
 Cały stan modułu byłby trudny do przedstawienia na grafie automatu, jednak wyróżnić można maszynę stanów służącą do pobierania próbek z ADC.
 
-![FSM-Sampler](img/FSM-Sampler.svg =240x)
+![FSM-Sampler](img/FSM-Sampler.svg =240x)  
+_Ryc. 2.2. Sampler - Maszyna stanów_
 
 * **q0** - `Idle` - stan bezczynności
 * **q1** - `StartSent` - stan tuż po wysłaniu impulsu `ADC_Start`
@@ -203,16 +204,16 @@ end process;
 W symulacji użyto dodatkowych sygnałów `adc_state` oraz `sample_delay_ct`, niebędących częścią modułu.
 
 ![Sim-Sampler-01](img/Sim-Sampler-01.png)
-_Ryc. 2.1. Sampler - Symulacja_
+_Ryc. 2.3. Sampler - Symulacja_
 
-Wycinek symulacji modułu widoczny na Ryc. 2.1. przedstawia pobieranie próbek co 10 ms, czyli 100 razy na sekundę, zgodnie z częstotliwością próbkowania. Adres do zapisu próbki w pamięci jest za każdym razem inkrementowany, a zapisywana wartość jest poprawnie ustawiana na 9 najstarszych bitów liczby otrzymanej od ADC.
+Wycinek symulacji modułu widoczny na Ryc. 2.3. przedstawia pobieranie próbek co 10 ms, czyli 100 razy na sekundę, zgodnie z częstotliwością próbkowania. Adres do zapisu próbki w pamięci jest za każdym razem inkrementowany, a zapisywana wartość jest poprawnie ustawiana na 9 najstarszych bitów liczby otrzymanej od ADC.
 
 ![Sim-Sampler-03](img/Sim-Sampler-03.png)
-_Ryc. 2.2. Sampler - Symulacja_
+_Ryc. 2.4. Sampler - Symulacja_
 
 <div class="page-break"></div>
 
-Na Ryc. 2.2. widać w większym szczególe proces pobrania pojedynczej próbki. `sample_delay_ct` odmierza 36 cykli zegara, podczas których sygnał `ADC_Busy` jest włączony, a `Sampler` oczekuje na próbkę. Gdy ją otrzyma, ustawia wartość do niej przeciwną oraz jej numer odpowiednio na wyjścia `Sample_Data` i `Sample_Addr`, a następnie wysyła impuls `Sample_WE`.
+Na Ryc. 2.4. widać w większym szczególe proces pobrania pojedynczej próbki. `sample_delay_ct` odmierza 36 cykli zegara, podczas których sygnał `ADC_Busy` jest włączony, a `Sampler` oczekuje na próbkę. Gdy ją otrzyma, ustawia wartość do niej przeciwną oraz jej numer odpowiednio na wyjścia `Sample_Data` i `Sample_Addr`, a następnie wysyła impuls `Sample_WE`.
 
 ##### SampleMemory
 ###### Zasada działania
@@ -268,7 +269,7 @@ Jedyny proces tego modułu jest odpowiedzialny za realizację całej jego funkcj
 ###### Symulacja
 
 ![Sim-SampleMemory-01](img/Sim-SampleMemory-01.png)
-_Ryc. 2.3. SampleMemory - Symulacja_
+_Ryc. 2.5. SampleMemory - Symulacja_
 
 Wykres symulacji ilustruje działanie modułu. Można zauważyć odczyt próbki `001101011` spod adresu `0000110010`, która została tam uprzednio zapisana.
 
@@ -394,35 +395,33 @@ end process;
 ###### Symulacja
 
 ![Sim-VGACtl-01](img/Sim-VGACtl-01.png)
-_Ryc. 2.4. VGACtl - Symulacja_
-
-Ryc. 2.4. przedstawia okres czasu odpowiadający odświeżeniu jednej klatki obrazu. Można zaobserwować niski impuls na wyjściu `VGA_VS` podczas przejścia do kolejnej klatki, a także zmiany `VGA_R`, `VGA_G` i `VGA_B` podczas rysowania białych punktów reprezentujących próbki.
-
-![Sim-VGACtl-02](img/Sim-VGACtl-02.png)
-_Ryc. 2.5. VGACtl - Symulacja_
-
-Na Ryc. 2.5. można zaobserwować odczytywanie kolejnych próbek w takt zegara 50 MHz.
-
-![Sim-VGACtl-03](img/Sim-VGACtl-03.png)
 _Ryc. 2.6. VGACtl - Symulacja_
 
-Na Ryc. 2.6. widoczne jest odświeżenie dwóch pełnych linii obrazu. Wyróżniają się niskie impulsy na wyjściu `VGA_HS` oraz przerwa w odczycie próbek, gdy liczniki `vs_counter` i `hs_counter` wskazują na pozycje poza obrazem.
+Ryc. 2.6. przedstawia okres czasu odpowiadający odświeżeniu jednej klatki obrazu. Można zaobserwować niski impuls na wyjściu `VGA_VS` podczas przejścia do kolejnej klatki, a także zmiany `VGA_R`, `VGA_G` i `VGA_B` podczas rysowania białych punktów reprezentujących próbki.
 
-![Sim-VGACtl-04](img/Sim-VGACtl-04.png)
+![Sim-VGACtl-02](img/Sim-VGACtl-02.png)
 _Ryc. 2.7. VGACtl - Symulacja_
 
-Rozświetlanie pixeli obrazu widoczne jest na Ryc. 2.7.
+Na Ryc. 2.7. można zaobserwować odczytywanie kolejnych próbek w takt zegara 50 MHz.
+
+![Sim-VGACtl-03](img/Sim-VGACtl-03.png)
+_Ryc. 2.8. VGACtl - Symulacja_
+
+Na Ryc. 2.8. widoczne jest odświeżenie dwóch pełnych linii obrazu. Wyróżniają się niskie impulsy na wyjściu `VGA_HS` oraz przerwa w odczycie próbek, gdy liczniki `vs_counter` i `hs_counter` wskazują na pozycje poza obrazem.
+
+![Sim-VGACtl-04](img/Sim-VGACtl-04.png)
+_Ryc. 2.9. VGACtl - Symulacja_
+
+Rozświetlanie pixeli obrazu widoczne jest na Ryc. 2.9.
 
 ##### ADC_Ctrl
 
 Opis modułu można znaleźć w [3].
 
-<div class="page-break"></div>
-
 ### 3. Implementacja
 #### 1. Rozmiar układu
 
-Zaprojektowany układ wykorzystuje stosunkowo niewielką część zasobów układu XC3S500E. Największe wykorzystanie zasobów można zauważyć wśród bloków wejścia/wyjścia, co spowodowane jest użyciem przez moduł `ADC_Ctrl` dużej liczby portów do komunikacji z ADC.
+Zaprojektowany układ wykorzystuje stosunkowo niewielką część zasobów mikroukładu XC3S500E. Największe wykorzystanie zasobów można zauważyć wśród bloków wejścia/wyjścia, co spowodowane jest użyciem przez moduł `ADC_Ctrl` dużej liczby portów do komunikacji z ADC.
 
 Logic Utilization | Used | Available | Utilization
 ---|---|---|---
@@ -469,9 +468,10 @@ Cały układ taktowany jest zegarem 50 MHz, czyli o okresie 20 ns. Ograniczenia 
 
 #### 3. Podręcznik obsługi
 
-Oscyloskop powinien zostać zaprogramowany na płycie Spartan-3E z układem FPGA XC3S500E.
+Oscyloskop powinien zostać zaprogramowany na płycie Spartan-3E z mikroukładem FPGA XC3S500E.
 
-![UserGuide-Board](img/UserGuide-Board.png =400x)
+![UserGuide-Board](img/UserGuide-Board-print.png =400x)
+_Ryc. 3.1. Istotne elementy płyty Spartan-3E_
 
 <div class="page-break"></div>
 
@@ -485,7 +485,8 @@ Aby uruchomić oscyloskop, należy wykonać następujące czynności:
 1. Przekręcić pokrętło "Rotary Encoder" w prawo o jeden przeskok
 1. Powtórzyć poprzedni krok, jeżeli występuje problem z obserwacją próbkowanego sygnału
 
-![UserGuide-Operation](img/UserGuide-Operation.png)
+![UserGuide-Operation](img/UserGuide-Operation-print.png)
+_Ryc. 3.2. Schemat połączenia urządzeń_
 
 ### 4. Podsumowanie
 
@@ -503,14 +504,20 @@ Autor projektu doszedł do wniosku, że gdyby od samego początku stosował w ko
 
 ### 5. Literatura
 
-1. Xilinx, Inc., 2013. _Spartan-3E FPGA Family Data Sheet_ (https://www.xilinx.com/support/documentation/data_sheets/ds312.pdf)
+1. Xilinx, Inc., 2013. _Spartan-3E FPGA Family Data Sheet_  
+	(https://www.xilinx.com/support/documentation/data_sheets/ds312.pdf)
 
-1. Xilinx, Inc., 2011. _Spartan-3E FPGA Starter Kit Board User Guide_ (https://www.xilinx.com/support/documentation/boards_and_kits/ug230.pdf)
+1. Xilinx, Inc., 2011. _Spartan-3E FPGA Starter Kit Board User Guide_  
+	(https://www.xilinx.com/support/documentation/boards_and_kits/ug230.pdf)
 
-1. Sugier, J. _Zajęcia projektowe do przedmiotu "Układy cyfrowe i systemy wbudowane": Zestawy Digilent S3E-Starter_ (http://www.zsk.iiar.pwr.edu.pl/zsk_ftp/fpga/)
+1. Sugier, J. _Zajęcia projektowe do przedmiotu "Układy cyfrowe i systemy wbudowane": Zestawy Digilent S3E-Starter_  
+	(http://www.zsk.iiar.pwr.edu.pl/zsk_ftp/fpga/)
 
-1. _VESA Signal 800 x 600 @ 72 Hz timing_ (SECONS Ltd., 2008) (http://tinyvga.com/vga-timing/800x600@72Hz)
+1. _VESA Signal 800 x 600 @ 72 Hz timing_ (SECONS Ltd., 2008)  
+	(http://tinyvga.com/vga-timing/800x600@72Hz)
 
-1. Zhang, W., 2001. _VHDL Tutorial: Learn by Example_ (University of California, Riverside, 2001) (http://esd.cs.ucr.edu/labs/tutorial/)
+1. Zhang, W., 2001. _VHDL Tutorial: Learn by Example_ (University of California, Riverside, 2001)  
+	(http://esd.cs.ucr.edu/labs/tutorial/)
 
-1. Hilbert, S., 2013. _VHDL Type Conversion_ (BitWeenie, LLC, 2013) (http://www.bitweenie.com/listings/vhdl-type-conversion/)
+1. Hilbert, S., 2013. _VHDL Type Conversion_ (BitWeenie, LLC, 2013)  
+	(http://www.bitweenie.com/listings/vhdl-type-conversion/)
