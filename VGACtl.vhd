@@ -1,24 +1,16 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity VGACtl is
 	Port ( PixelClk_50MHz : in  STD_LOGIC;
-		   Sample_Data : in  STD_LOGIC_VECTOR (8 downto 0);
-		   Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
-		   VGA_R : out  STD_LOGIC := '0';
-		   VGA_G : out  STD_LOGIC := '0';
-		   VGA_B : out  STD_LOGIC := '0';
-		   VGA_HS : out  STD_LOGIC := '0';
-		   VGA_VS : out  STD_LOGIC := '0');
+	       Sample_Data : in  STD_LOGIC_VECTOR (8 downto 0);
+	       Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
+	       VGA_R : out  STD_LOGIC := '0';
+	       VGA_G : out  STD_LOGIC := '0';
+	       VGA_B : out  STD_LOGIC := '0';
+	       VGA_HS : out  STD_LOGIC := '0';
+	       VGA_VS : out  STD_LOGIC := '0' );
 end VGACtl;
 
 architecture Behavioral of VGACtl is
@@ -26,29 +18,29 @@ architecture Behavioral of VGACtl is
 	Signal hs_counter : INTEGER := 0;
 begin
 	
-	Horizontal_sync : process ( PixelClk_50MHz, hs_counter ) is
+	Horizontal_sync : process ( PixelClk_50MHz ) is
 	begin
 		if (rising_edge(PixelClk_50MHz)) then
 			if (hs_counter < -64) then
-            VGA_HS <= '0';
-         else
-            VGA_HS <= '1';
-         end if;
+				VGA_HS <= '0';
+			else
+				VGA_HS <= '1';
+			end if;
 		end if;
 	end process;
-   
-	Vertical_sync : process ( PixelClk_50MHz, vs_counter ) is
+	
+	Vertical_sync : process ( PixelClk_50MHz ) is
 	begin
 		if (rising_edge(PixelClk_50MHz)) then
 			if (vs_counter < -23) then
-            VGA_VS <= '0';
-         else
-            VGA_VS <= '1';
-         end if;
+				VGA_VS <= '0';
+			else
+				VGA_VS <= '1';
+			end if;
 		end if;
 	end process;
-   
-	Pixel_counters : process ( PixelClk_50MHz, hs_counter ) is
+	
+	Pixel_counters : process ( PixelClk_50MHz ) is
 	begin
 		if (falling_edge(PixelClk_50MHz)) then
 			if (hs_counter = 855) then

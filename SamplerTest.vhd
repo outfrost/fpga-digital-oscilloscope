@@ -1,8 +1,5 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 USE ieee.numeric_std.ALL;
 USE ieee.math_real.ALL;
 
@@ -12,7 +9,6 @@ END SamplerTest;
 ARCHITECTURE behavior OF SamplerTest IS
 	
 	-- Component Declaration for the Unit Under Test (UUT)
-	
 	COMPONENT Sampler
 	PORT(
 		Clk_50MHz : IN  std_logic;
@@ -24,11 +20,9 @@ ARCHITECTURE behavior OF SamplerTest IS
 		Sample_Data : OUT  std_logic_vector(8 downto 0);
 		AMP_WE : OUT  std_logic;
 		AMP_Data : OUT  std_logic_vector(7 downto 0);
-		ADC_Start : OUT  std_logic;
-		Debug : OUT  std_logic
-		);
+		ADC_Start : OUT  std_logic
+	);
 	END COMPONENT;
-	
 	
 	--Inputs
 	signal Clk_50MHz : std_logic := '0';
@@ -43,7 +37,6 @@ ARCHITECTURE behavior OF SamplerTest IS
 	signal AMP_WE : std_logic;
 	signal AMP_Data : std_logic_vector(7 downto 0);
 	signal ADC_Start : std_logic;
-	signal Debug : std_logic;
 	
 	-- Clock period definitions
 	constant Clk_period : time := 20 ns;
@@ -66,19 +59,17 @@ BEGIN
 		Sample_Data => Sample_Data,
 		AMP_WE => AMP_WE,
 		AMP_Data => AMP_Data,
-		ADC_Start => ADC_Start,
-		Debug => Debug
-		);
-		
+		ADC_Start => ADC_Start
+	);
+	
 	-- Clock process definitions
-	Clk_process :process
+	Clk_process : process
 	begin
 		Clk_50MHz <= '0';
 		wait for Clk_period/2;
 		Clk_50MHz <= '1';
 		wait for Clk_period/2;
 	end process;
-	
 	
 	-- Stimulus process
 	stim_ADC : process
@@ -115,7 +106,6 @@ BEGIN
 		wait;
 		
 	end process;
-	
 	
 	-- Stimulus process
 	stim_Hold : process

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <symbol version="7" name="SampleMemory">
     <symboltype>BLOCK</symboltype>
-    <timestamp>2018-3-20T15:23:50</timestamp>
+    <timestamp>2018-7-14T1:28:47</timestamp>
     <pin polarity="Input" x="0" y="-352" name="Clk" />
     <pin polarity="Input" x="0" y="-288" name="Write_Enable" />
     <pin polarity="Input" x="0" y="-224" name="Write_Addr(9:0)" />

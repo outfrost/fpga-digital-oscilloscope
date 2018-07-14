@@ -1,35 +1,25 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity Sampler is
-    Port ( Clk_50MHz : in  STD_LOGIC;
-           ADC_Busy : in  STD_LOGIC;
-           ADC_Data : in  STD_LOGIC_VECTOR (13 downto 0);
-           Hold : in  STD_LOGIC;
-           Sample_WE : out  STD_LOGIC := '0';
-           Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
-           Sample_Data : out  STD_LOGIC_VECTOR (8 downto 0) := "000000000";
-           AMP_WE : out  STD_LOGIC := '0';
-           AMP_Data : out  STD_LOGIC_VECTOR (7 downto 0) := "00000000";
-           ADC_Start : out  STD_LOGIC := '0';
-		   Debug : out  STD_LOGIC := '0');
+	Port ( Clk_50MHz : in  STD_LOGIC;
+	       ADC_Busy : in  STD_LOGIC;
+	       ADC_Data : in  STD_LOGIC_VECTOR (13 downto 0);
+	       Hold : in  STD_LOGIC;
+	       Sample_WE : out  STD_LOGIC := '0';
+	       Sample_Addr : out  STD_LOGIC_VECTOR (9 downto 0) := "0000000000";
+	       Sample_Data : out  STD_LOGIC_VECTOR (8 downto 0) := "000000000";
+	       AMP_WE : out  STD_LOGIC := '0';
+	       AMP_Data : out  STD_LOGIC_VECTOR (7 downto 0) := "00000000";
+	       ADC_Start : out  STD_LOGIC := '0' );
 end Sampler;
 
 architecture Behavioral of Sampler is
-	--Type SamplerState is (ColdStart, Ready);
-	Type SamplerState is (Ready);
+	Type SamplerState is (Ready); --(ColdStart, Ready);
 	--Type PreampState is (ColdStart, ControlWordSet, WriteEnableSent, AwaitingInit, Ready);
 	Type ScanState is (Idle, StartSent, AwaitingSample, SampleAcquired, WriteEnableSent);
-
+	
 	Signal state : SamplerState := Ready;
 	--Signal preamp_state : PreampState;
 	Signal scan_state : ScanState := Idle;
@@ -114,7 +104,7 @@ begin
 		end if;
 	end process;
 	
-	Sampling_rate_ct : process ( Clk_50MHz, clock_counter ) is
+	Sampling_rate_ct : process ( Clk_50MHz ) is
 	begin
 		if (falling_edge(Clk_50MHz)) then
 			if (clock_counter < 500000) then
@@ -125,7 +115,7 @@ begin
 		end if;
 	end process;
 	
-	Pixel_ct : process ( Clk_50MHz, pixel_counter ) is
+	Pixel_ct : process ( Clk_50MHz ) is
 	begin
 		if (falling_edge(Clk_50MHz)) then
 			if (pixel_counter < 692640) then

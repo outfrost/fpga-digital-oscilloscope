@@ -1,17 +1,12 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
-
 ENTITY VGACtlTest IS
 END VGACtlTest;
 
 ARCHITECTURE behavior OF VGACtlTest IS
 	
 	-- Component Declaration for the Unit Under Test (UUT)
-	
 	COMPONENT VGACtl
 	PORT(
 		PixelClk_50MHz : IN  std_logic;
@@ -24,7 +19,6 @@ ARCHITECTURE behavior OF VGACtlTest IS
 		VGA_VS : OUT  std_logic
 	);
 	END COMPONENT;
-	
 	
 	--Inputs
 	signal PixelClk_50MHz : std_logic := '0';
@@ -63,7 +57,6 @@ BEGIN
 		PixelClk_50MHz <= '1';
 		wait for Clk_period/2;
 	end process;
-	
 	
 	-- Stimulus process
 	stim_proc: process
